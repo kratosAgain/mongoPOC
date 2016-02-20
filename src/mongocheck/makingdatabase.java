@@ -24,19 +24,20 @@ public class makingdatabase {
 			
 	         // To connect to mongodb server
 	         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-		//made 3 collections in mongo terminal {databaseName = nikipoc} 	 Collections :concepts {conceptID,name}  phrase  {conceptID,name}  entities  {entityID,name}	
+				
 	         // Now connect to your databases
-	         DB db = mongoClient.getDB( "nikipoc" );
+	         DB db = mongoClient.getDB( "nikipocnew" );
 	         System.out.println("Connect to database successfully");
 			 BufferedReader br = new BufferedReader(new FileReader("final.txt"));	
 			 DBCollection col=db.getCollection("phrase");
-			 DBCollection col1 = db.getCollection("entities");
+			 DBCollection col1 = db.getCollection("entity");
 			 DBCollection col2 = db.getCollection("concepts");
 			 for(int i=2;i<=20;i++){
 				 BasicDBObject document = new BasicDBObject();
 				 String str = ""+"a"+i;
 				 
-				 document.put(Integer.toString(i), str);
+				 document.put("name", str);
+				 document.put("conceptID", Integer.toString(i));
 				 col2.insert(document);
 			 }
 			 int e=2;
@@ -48,14 +49,16 @@ public class makingdatabase {
 					 Random randomGenerator = new Random();
 					 int ran = randomGenerator.nextInt(20);
 					 if(ran==0)ran++;
-					 document.put(str,Integer.toString(ran));
+					 document.put("name", str);
+					 document.put("conceptID", Integer.toString(ran));
 					 col.insert(document);
 				 }
 				 else{
 					 String str = br.readLine()+br.readLine()+br.readLine();
 					 i+=3;
 					 BasicDBObject document = new BasicDBObject();
-					 document.put(Integer.toString(e),str);
+					 document.put("name", str);
+					 document.put("entityID", Integer.toString(e));
 					 e++;
 					 col1.insert(document);
 				 }
@@ -71,6 +74,13 @@ public class makingdatabase {
 //	         document.put("tags", list);
 //	         document.put("likes", 5000);
 	          
+	         BasicDBObject query = new BasicDBObject();
+	         query.put("entityID",2);
+	         DBCursor cursor = col1.find(query);
+	         //System.out.println(cursor);
+	   	  while (cursor.hasNext()) {
+	   		System.out.println(cursor.next()+ "hellloo kfnbk");
+	   	  }
 	         
 	          
 	        
