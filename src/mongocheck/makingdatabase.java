@@ -24,7 +24,7 @@ public class makingdatabase {
 			
 	         // To connect to mongodb server
 	         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-				
+		//made 3 collections in mongo terminal {databaseName = nikipoc} 	 Collections :concepts {conceptID,name}  phrase  {conceptID,name}  entities  {entityID,name}	
 	         // Now connect to your databases
 	         DB db = mongoClient.getDB( "nikipoc" );
 	         System.out.println("Connect to database successfully");
