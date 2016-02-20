@@ -30,17 +30,18 @@ public class makingdatabase {
 	         System.out.println("Connect to database successfully");
 			 BufferedReader br = new BufferedReader(new FileReader("final.txt"));	
 			 DBCollection col=db.getCollection("phrase");
-			 //DBCollection col1 = db.getCollection("entities");
-//			 for(int i=2;i<=20;i++){
-//				 BasicDBObject document = new BasicDBObject();
-//				 String str = ""+"a"+i;
-//				 
-//				 document.put(Integer.toString(i), str);
-//				 col.insert(document);
-//			 }
+			 DBCollection col1 = db.getCollection("entities");
+			 DBCollection col2 = db.getCollection("concepts");
+			 for(int i=2;i<=20;i++){
+				 BasicDBObject document = new BasicDBObject();
+				 String str = ""+"a"+i;
+				 
+				 document.put(Integer.toString(i), str);
+				 col2.insert(document);
+			 }
 			 int e=2;
 			 for(int i=1;i<=450000;i++){
-				 if(i<=15000 && i>=4134){
+				 if(i<=15000){
 					 String str = br.readLine()+br.readLine()+br.readLine();
 					 i+=3;
 					 BasicDBObject document = new BasicDBObject();
@@ -50,14 +51,14 @@ public class makingdatabase {
 					 document.put(str,Integer.toString(ran));
 					 col.insert(document);
 				 }
-//				 if(i>15000){
-//					 String str = br.readLine()+br.readLine()+br.readLine();
-//					 i+=3;
-//					 BasicDBObject document = new BasicDBObject();
-//					 document.put(Integer.toString(e),str);
-//					 e++;
-//					 col1.insert(document);
-//				 }
+				 else{
+					 String str = br.readLine()+br.readLine()+br.readLine();
+					 i+=3;
+					 BasicDBObject document = new BasicDBObject();
+					 document.put(Integer.toString(e),str);
+					 e++;
+					 col1.insert(document);
+				 }
 			 }
 	     	
 //	         BasicDBObject document = new BasicDBObject();
@@ -76,8 +77,7 @@ public class makingdatabase {
 	         
 	        
 
-//	     	DBCollection col=db.getCollection("mycol");
-//	     	col.insert(document);
+
 	     	
 	         System.out.println("Collection created successfully");
 	        // System.out.println(col1.find());
