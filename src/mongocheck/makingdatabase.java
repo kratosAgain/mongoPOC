@@ -26,23 +26,27 @@ public class makingdatabase {
 	         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
 				
 	         // Now connect to your databases
-	         DB db = mongoClient.getDB( "nikipocnew" );
+	         DB db = mongoClient.getDB( "mongopoc" );
 	         System.out.println("Connect to database successfully");
 			 BufferedReader br = new BufferedReader(new FileReader("final.txt"));	
 			 DBCollection col=db.getCollection("phrase");
 			 DBCollection col1 = db.getCollection("entity");
-			 DBCollection col2 = db.getCollection("concepts");
+			 DBCollection col2 = db.getCollection("concept");
 			 for(int i=2;i<=20;i++){
-				 BasicDBObject document = new BasicDBObject();
+				 ArrayList<Integer> list= new ArrayList();
+				 ArrayList<String> list1= new ArrayList();
+				 BasicDBObject document = new BasicDBObject().append("concept", list).append("entitesID", list).append("phrase", list1);
 				 String str = ""+"a"+i;
 				 
 				 document.put("name", str);
 				 document.put("conceptID", Integer.toString(i));
+				 
+				
 				 col2.insert(document);
 			 }
 			 int e=2;
 			 for(int i=1;i<=450000;i++){
-				 if(i<=15000){
+				 if(i<=20000){
 					 String str = br.readLine()+br.readLine()+br.readLine();
 					 i+=3;
 					 BasicDBObject document = new BasicDBObject();
@@ -53,7 +57,7 @@ public class makingdatabase {
 					 document.put("conceptID", Integer.toString(ran));
 					 col.insert(document);
 				 }
-				 else{
+				 if(i>15000){
 					 String str = br.readLine()+br.readLine()+br.readLine();
 					 i+=3;
 					 BasicDBObject document = new BasicDBObject();
@@ -75,11 +79,11 @@ public class makingdatabase {
 //	         document.put("likes", 5000);
 	          
 	         BasicDBObject query = new BasicDBObject();
-	         query.put("entityID",2);
+	         query.put("entityID","2");
 	         DBCursor cursor = col1.find(query);
 	         //System.out.println(cursor);
 	   	  while (cursor.hasNext()) {
-	   		System.out.println(cursor.next()+ "hellloo kfnbk");
+	   		System.out.println(cursor.next());
 	   	  }
 	         
 	          
