@@ -24,7 +24,6 @@ public class makingdatabase {
 			
 	         // To connect to mongodb server
 	         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-				
 	         // Now connect to your databases
 	         DB db = mongoClient.getDB( "mongopoc" );
 	         System.out.println("Connect to database successfully");
@@ -40,8 +39,6 @@ public class makingdatabase {
 				 
 				 document.put("name", str);
 				 document.put("conceptID", Integer.toString(i));
-				 
-				
 				 col2.insert(document);
 			 }
 			 int e=2;
@@ -85,14 +82,6 @@ public class makingdatabase {
 	   	  while (cursor.hasNext()) {
 	   		System.out.println(cursor.next());
 	   	  }
-	         
-	          
-	        
-	         
-	        
-
-
-	     	
 	         System.out.println("Collection created successfully");
 	        // System.out.println(col1.find());
 	      }catch(Exception e){
